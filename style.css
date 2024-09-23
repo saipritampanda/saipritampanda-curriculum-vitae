@@ -15,6 +15,7 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -57,9 +58,9 @@ header {
   text-align: center;
 }
 
-header h1 {
+.header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 /* Navigation Styles */
@@ -78,10 +79,36 @@ nav ul li a {
   color: rgb(183, 183, 183);
 }
 
-nav a:hover {
-  color: #ffffff;
-  transform: translateY(-5px);
-  transition: transform 0.4s ease-in-out;
+nav ul li {
+  position: relative; /* Required for absolute positioning of the pseudo-element */
+}
+
+nav ul li a {
+  position: relative; /* Required for the pseudo-element */
+  padding-bottom: 5px; /* Space for the border */
+  color: rgb(183, 183, 183); /* Default text color */
+  transition: color 0.4s ease-in-out; /* Smooth color transition */
+}
+
+nav ul li a::after{
+  content: '';
+  display: block;
+  width: 0; /* Start width at 0 */
+  height: 3px; /* Border thickness */
+  background: #00bcd4; /* Border color */
+  transition: width 0.35s ease-in-out; /* Animation for border width */
+  position: absolute;
+  left: 50%;
+  bottom: 0; /* Position it at the bottom of the link */
+  transform: translateX(-50%); /* Center it */
+}
+
+nav ul li a:hover, nav .navbar-brand:hover{
+  color: #ffffff; /* Change text color to white on hover */
+}
+
+nav ul li a:hover::after {
+  width: 100%; /* Expand border to full width on hover */
 }
 
 /* Specific section styles for spacing */
@@ -89,9 +116,11 @@ section {
   padding: 1em 0; /* Adjust padding for sections as needed */
 }
 
+
+
 /* About Section */
 #about {
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 #about .profile-pic {
@@ -120,11 +149,15 @@ section {
 .timeline-item {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 2em;
+  margin-bottom: 1.2em;
 }
 
 .timeline-content {
   flex-grow: 1;
+}
+
+.timeline-content .card{
+  margin-top: 0px;
 }
 
 .timeline-date {
@@ -140,40 +173,215 @@ section {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Skills Section */
-.skills {
-  background: #f9f9f9;
-  padding: 60px 0;
+
+#skills {
+  padding: 80px 0;
+  background-color: #f4f7fa;
 }
 
-.skills .progress {
-  height: 20px;
-  background: #eaeaea;
-  border-radius: 10px;
+#soft-skills {
+  padding: 80px 0;
+  background-color: #f4f7fa;
+}
+
+#soft-skills .container h2{
+  margin: 12px;
+}
+
+#software-proficiency .container h2{
+  margin: 12px;
+}
+
+/* Center the boxes in each row */
+#skills .row, #soft-skills .row, #software-proficiency .row {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  flex-wrap: wrap; /* Ensure items wrap to the next row if needed */
+}
+
+/* Updated skill-box to stretch and center content */
+.skill-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 11px;
+  margin: 10px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  width: 95%; /* Ensure the box stretches */
+  display: flex; /* Use flexbox to center content */
+  flex-direction: column; /* Keep the content in a column */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+
+/* Gradient overlay */
+.skill-box::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.9), rgba(0, 204, 255, 0.5));
+  transition: top 0.3s ease-in-out, left 0.3s ease-in-out;
+  z-index: 0;
+}
+
+.skill-box:hover::before {
+  top: 0;
+  left: 0;
+}
+
+/* Hover effects for the box */
+.skill-box:hover {
+  transform: scale(1.06);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Text styling and hover effects */
+.skill-box h4, .skill-box p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2rem; /* Adjusted for soft skills */
+  color: #333;
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  z-index: 1;
+  position: relative;
+}
+
+.skill-box:hover h4, .skill-box:hover p {
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 0.72px black; /* Thin black border */
+}
+
+/* Sparkle effect */
+.sparkle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   overflow: hidden;
 }
 
-.skills .progress-bar {
-  height: 100%;
-  line-height: 20px;
-  transition: width 0.5s ease-in-out;
+.sparkle::before, .sparkle::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 20%, transparent 20%);
+  animation: sparkle 1.5s infinite;
 }
 
-.skills .progress-bar.bg-success {
-  background-color: #4CAF50;
+.sparkle::before {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
 }
 
-.skills .progress-bar.bg-info {
-  background-color: #17A2B8;
+.sparkle::after {
+  top: 50%;
+  left: 50%;
+  animation-delay: 0.5s;
 }
 
-.skills .progress-bar.bg-warning {
-  background-color: #FFC107;
+/* Sparkle keyframes */
+@keyframes sparkle {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
+
+/* Responsiveness for Small & Extra Small Screens */
+@media (max-width: 768px) {
+  
+  .skill-box {
+    margin-bottom: 15px;
+  }
+
+  .skill-box h4 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsiveness for Medium, Large & Extra Large Screens */
+@media (min-width: 768px){
+
+  .skill-box h4 {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Projects Section */
 .projects {
   padding: 60px 0;
+}
+
+#projects .card img{
+  border-style: none;
+  height: 160px;
+  width: 160px;
+}
+
+#projects .padding-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically */
+  height: 100%;            /* Make sure the div has a height */
 }
 
 .projects .card {
@@ -181,15 +389,12 @@ section {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
 }
 
 .projects .card:hover {
   transform: translateY(-15px);
   box-shadow: 0 10px 50px rgba(0, 0, 0, 1);
-}
-
-.projects .card img {
-  border-bottom: 1px solid #eaeaea;
 }
 
 .projects .card-body {
@@ -230,6 +435,208 @@ section {
   animation: fadeIn 2s ease-in-out;
 }
 
+
+
+
+
+/* LICENSES & CERTIFICATIONS Section */
+
+#certifications {
+  background-color: #f8f9fa; /* Light background */
+}
+
+.card {
+  border: none; /* Remove default card border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border-radius: 5px;
+}
+
+.card img {
+  object-fit: contain; /* Ensure the image fits within the container */
+  border-radius: 6px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-subtitle, .card-body p {
+  font-size: 0.9rem;
+}
+
+/* Container for the button to ensure overflow is hidden */
+.btn-outline-primary {
+  position: relative;
+  overflow: hidden;
+  border-radius: 11px;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth scaling */
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+.btn-outline-primary:hover {
+  transform: scale(1.12); /* Slightly increase the button size */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+}
+
+/* Sliding gradient overlay effect */
+.btn-outline-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(0, 123, 255, 0.9), rgba(255, 255, 255, 0.9), rgba(0, 123, 255, 0.9));
+  transition: all 0.6s ease; /* Make the animation smoother */
+  z-index: 0;
+  transform: skewX(-25deg); /* Create the sliding diagonal effect */
+}
+
+.btn-outline-primary:hover::before {
+  left: 0; /* Slide the gradient overlay to cover the button */
+}
+
+.btn-outline-primary a {
+  position: relative;
+  color: inherit; /* Inherit the button text color */
+  text-decoration: none;
+  z-index: 1; /* Ensure link text stays above overlay */
+}
+
+/* Add some animated text effect */
+.btn-outline-primary span {
+  display: inline-block;
+  transition: transform 0.3s ease, letter-spacing 0.3s ease; /* Smooth transition for text */
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.btn-outline-primary:hover span {
+  color: white;
+  transform: translateY(-2.8px); /* Slightly move text upwards */
+  letter-spacing: 0.8px; /* Increase letter spacing */
+}
+
+
+
+
+
+
+
+/* Test Scores Section */
+#test-scores {
+  background: linear-gradient(to right, #f4f7fa, #ffffff);
+  padding: 80px 0;
+}
+
+.test-score-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  text-align: center;
+}
+
+.test-score-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.test-score-card .card-body {
+  padding: 20px;
+}
+
+.test-score-card h4 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 1em;
+}
+
+.test-score-card p {
+  color: #777;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+/* Circular Progress Bar */
+.progress-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#00ccff calc(var(--percentage) * 1%), #f4f7fa calc(var(--percentage) * 1%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
+}
+
+.progress-circle::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.score-value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+@keyframes progressAnimation {
+  from {
+    --percentage: 0;
+  }
+  to {
+    --percentage: var(--target);
+  }
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .test-score-card {
+    margin-bottom: 30px;
+  }
+}
+
+/* Extra small devices (max-width: 575px) */
+@media (max-width: 575px) {
+  .test-score-card .card-body h4 {
+    font-size: 1rem !important; /* Important to ensure specificity */
+  }
+
+  .test-score-card .card-body p {
+    font-size: 0.85rem !important;   /* Important to ensure specificity */
+  }
+}
+
+/* Small devices (min-width: 576px and max-width: 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .test-score-card .card-body h4 {
+    font-size: 1.2rem !important; /* Slightly larger font for h4 */
+  }
+
+  .test-score-card .card-body p {
+    font-size: 1rem !important; /* Slightly larger font for paragraph */
+  }
+}
+
+
+
+
 /* Social Connections Section */
 .social {
   background: #f9f9f9;
@@ -247,11 +654,22 @@ section {
 .social .social-link:hover img {
   transform: scale(1.4);
   transition: transform 0.2s ease-in-out;
+  text-decoration: none;
+
 }
 
 .social .social-link p {
   font-size: large;
+
 }
+
+
+
+
+------------------
+
+
+
 
 /* Contact Section */
 .contact {
@@ -286,10 +704,24 @@ section {
   padding: 20px 0;
   text-align: center;
   font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .footer p {
   margin: 0;
+}
+
+/* Static Animation on Elements */
+.footer h6, .footer p, .footer a {
+  animation: hoverBounce 2s ease infinite;
+}
+
+.footer .explore-container{
+  margin: 10px;
+}
+
+.footer .explore-container .row div{
+  text-align: start;
 }
 
 /* Upper Button Styles */
@@ -301,24 +733,38 @@ section {
   z-index: 99.5;
   border: none;
   outline: none;
-  background: linear-gradient(45deg, #ffaf00, #ff6700); /* Gradient background */
+  background: linear-gradient(135deg, #00bcd4, #004c8c); /* Blue gradient background */
   color: white;
   cursor: pointer;
-  padding: 11px;
-  border-radius: 40%; /* Fully rounded */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 50%; /* Fully rounded */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+  animation: bounce 1.4s infinite; /* Bounce animation to attract attention */
 }
 
 .upper-button img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .upper-button:hover {
-  background: linear-gradient(45deg, #ff6700, #ffaf00); /* Gradient background on hover */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transform: scale(1.1); /* Slightly larger on hover */
+  background: linear-gradient(135deg, #004c8c, #00bcd4); /* Gradient background on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transform: scale(1.1) rotate(10deg); /* Slightly larger and rotated on hover */
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Responsive adjustments */
@@ -338,5 +784,65 @@ section {
   }
   to {
     opacity: 1;
+  }
+}
+
+
+
+/*QUOTES CSS*/
+/* General Section Styling */
+
+#tech-quote-section h2, #motivational-quote-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/* Quote Box Styling */
+#tech-quote, #motivational-quote {
+  font-size: 1.7rem;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+  border-radius: 12px;
+  padding: 20px 40px;
+  color: white;
+  max-width: 800px;
+  margin: 10px auto;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Container for the quotes section */
+#tech-quote-section, #motivational-quote-section {
+  position: relative;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styling for Smaller Screens */
+@media (max-width: 768px) {
+  #tech-quote, #motivational-quote {
+    font-size: 1.2rem;
+    padding: 15px 20px;
   }
 }
