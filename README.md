@@ -37,4 +37,4 @@ If you have any questions, feel free to reach out:
 - **💼 Naukri.com**: [Profile](https://www.naukri.com/mnjuser/profile?id=&altresid)
 - **📸 Instagram**: [Profile](https://www.instagram.com/saipritampanda)
 - **✖️ X (formerly Twitter)**: [Profile](https://x.com/SaiPritamPanda1) 
-- **🌍 Portfolio Website**: [Website](https://yourportfolio.com)
+- **🌍 Portfolio Website**: [Website](https://saipritampanda.github.io/saipritampanda-curriculum-vitae/)
