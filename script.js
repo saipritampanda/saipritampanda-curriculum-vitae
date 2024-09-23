@@ -60,6 +60,19 @@ document.addEventListener("DOMContentLoaded", function () {
   skillsObserver.observe(skillsSection);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const progressCircles = document.querySelectorAll('.progress-circle');
+
+  progressCircles.forEach(circle => {
+    const score = circle.getAttribute('data-score');
+    const percentage = score ? parseInt(score, 10) : 0;
+
+    // Update the --percentage variable in CSS
+    circle.style.setProperty('--percentage', percentage);
+  });
+});
+
+
 // JavaScript for Social Media Links Animation
 document.addEventListener("DOMContentLoaded", function () {
   const socialLinks = document.querySelectorAll(".social-link");
@@ -79,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 var upperButton = document.getElementById("upperButton");
 
 // Show the button after scrolling down 750px
-window.onscroll = function() {
+window.onscroll = function () {
   if (document.body.scrollTop > 750 || document.documentElement.scrollTop > 750) {
     upperButton.style.display = "block";
   } else {
@@ -88,9 +101,32 @@ window.onscroll = function() {
 };
 
 // Scroll to the top when the button is clicked
-upperButton.onclick = function() {
+upperButton.onclick = function () {
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
 };
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Fetch the quotes JSON file
+  fetch('quotes.json')
+    .then(response => response.json())
+    .then(data => {
+      // Get random tech and motivational quotes
+      const randomTechQuote = getRandomQuote(data.techQuotes);
+      const randomMotivationalQuote = getRandomQuote(data.motivationalQuotes);
+
+      // Insert quotes into specific areas of the page
+      document.getElementById('tech-quote').textContent = randomTechQuote.quote;
+      document.getElementById('motivational-quote').textContent = randomMotivationalQuote.quote;
+    })
+    .catch(error => console.error('Error loading quotes:', error));
+
+  // Function to get a random quote from an array
+  function getRandomQuote(quotesArray) {
+    const randomIndex = Math.floor(Math.random() * quotesArray.length);
+    return quotesArray[randomIndex];
+  }
+});
