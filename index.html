@@ -77,14 +77,47 @@
           <h2>About Me</h2>
           <p>Dedicated and motivated individual with a strong commitment to excellence and a passion for learning.
             Despite being a fresher, enthusiastic about applying skills and knowledge to contribute effectively in a
-            vibrant company and embracing opportunities for growth with enthusiasm.</p>
+            vibrant company and embracing opportunities for growth with enthusiasm.
+          </p>
+          <br>
+          <!-- Compact Profile Views Section -->
+          <div class="container my-4 d-flex justify-content-center align-items-center">
+            <div class="d-inline-flex align-items-center bg-dark text-white rounded-pill py-2 px-3 shadow">
+              <i class="fas fa-users mr-2" style="color:#ffffff;"></i>
+              <span class="mr-2 justify-content-center d-flex">Profile Views</span>
+              <span id="viewsCount" class="badge badge-light text-dark px-3 py-1"
+                style="background-color: #a5f3ff;">87</span>
+            </div>
+          </div>
+          <div class="my-4 d-flex justify-content-center align-items-center m-2">
+            <p class="text-white bg-dark text-center rounded-lg p-2 px-3" style="font-size: x-small;">Profile views are
+              updated daily at 00:00:00 IST. In rare cases, updates may take up to 24 hours to reflect.</p>
+          </div>
+
+          <!-- FontAwesome Icons (if not already included) -->
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+          <script>
+            // Fetch the profile views count from the backend on page load
+            window.onload = function () {
+              fetch('/api/profile-views')
+                .then(response => response.json())
+                .then(data => {
+                  document.getElementById('viewsCount').textContent = data.views;
+                })
+                .catch(error => console.error('Error fetching views:', error));
+            };
+          </script>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 d-flex justify-content-center align-items-center">
           <img src="profile-pic.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
         </div>
       </div>
     </div>
   </section>
+
+
+
 
   <!-- Section to display the random tech quote -->
   <section id="tech-quote-section">
@@ -950,21 +983,21 @@
       <h2 class="text-center mb-5">Social Connections</h2>
       <div class="row justify-content-center">
         <div class="col-lg-2 col-md-3 col-4 text-center mb-4">
-          <a href="https://www.linkedin.com/" target="_blank" class="social-link">
+          <a href="https://www.linkedin.com/in/sai-pritam-panda-4bb115231/" target="_blank" class="social-link">
             <img src="Image Assets/Social Media/linkedin_professional.png" alt="LinkedIn" class="img-fluid mb-2"
               style="max-width: 80px;">
             <p class="text-muted">LinkedIn</p>
           </a>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center mb-4">
-          <a href="https://github.com/" target="_blank" class="social-link">
+          <a href="https://github.com/saipritampanda" target="_blank" class="social-link">
             <img src="Image Assets/Social Media/github_professional.png" alt="GitHub" class="img-fluid mb-2"
               style="max-width: 80px;">
             <p class="text-muted">GitHub</p>
           </a>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center mb-4">
-          <a href="https://www.hackerrank.com/" target="_blank" class="social-link">
+          <a href="https://www.hackerrank.com/profile/saipritampanda21" target="_blank" class="social-link">
             <img src="Image Assets/Social Media/hackerrank_professional.png" alt="HackerRank" class="img-fluid mb-2"
               style="max-width: 80px;">
             <p class="text-muted">HackerRank</p>
@@ -985,14 +1018,14 @@
           </a>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center mb-4">
-          <a href="https://www.instagram.com/" target="_blank" class="social-link">
+          <a href="https://www.instagram.com/saipritampanda" target="_blank" class="social-link">
             <img src="Image Assets/Social Media/instagram_professional.png" alt="Instagram" class="img-fluid mb-2"
               style="max-width: 80px;">
             <p class="text-muted">Instagram</p>
           </a>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center mb-4">
-          <a href="https://twitter.com/" target="_blank" class="social-link">
+          <a href="https://x.com/SaiPritamPanda1" target="_blank" class="social-link">
             <img src="Image Assets/Social Media/twitter_professional.png" alt="Twitter" class="img-fluid mb-2"
               style="max-width: 80px;">
             <p class="text-muted">Twitter</p>
@@ -1067,4 +1100,5 @@
 
 
   <script src="script.js"></script>
+  <script src="Profile_Views.js"></script>
 </body>
